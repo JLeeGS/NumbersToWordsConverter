@@ -4,36 +4,43 @@ import java.util.*;
 
 public class NumberSet {
     //numbers 1-19,//20-100...
-    private List<Number> numsOneToNineteen, numsByTens;
+    private List<NumberObj> numsOneToNineteen, numsByTens;
 
-    public ArrayList<Number> getNumsOneToNineteen(){
-        ArrayList<Number> numList= new ArrayList<Number>(Arrays.asList(
-                new Number(0, "Zero"), new Number(1, "One"), new Number(2, "Two"), new Number(3, "Three"),
-                new Number(4, "Four"), new Number(5,  "Five"), new Number(6, "Six"), new Number(7, "Seven"),
-                new Number(8, "Eight"), new Number(9, "Nine"),
-                new Number(10, "Ten"), new Number(11, "Eleven"), new Number(12, "Twelve") , new Number(13, "Thirteen"),
-                new Number(14, "Fourteen"), new Number(15, "Fifteen"), new Number(16, "Sixteen"), new Number(17, "Seventeen"),
-                new Number(18, "Eighteen"), new Number(19, "Nineteen")
+    public ArrayList<NumberObj> getNumsOneToNineteen(){
+        ArrayList<NumberObj> numList= new ArrayList<NumberObj>(Arrays.asList(
+                new NumberObj(0, "Zero"), new NumberObj(1, "One"), new NumberObj(2, "Two"), new NumberObj(3, "Three"),
+                new NumberObj(4, "Four"), new NumberObj(5,  "Five"), new NumberObj(6, "Six"), new NumberObj(7, "Seven"),
+                new NumberObj(8, "Eight"), new NumberObj(9, "Nine"),
+                new NumberObj(10, "Ten"), new NumberObj(11, "Eleven"), new NumberObj(12, "Twelve") , new NumberObj(13, "Thirteen"),
+                new NumberObj(14, "Fourteen"), new NumberObj(15, "Fifteen"), new NumberObj(16, "Sixteen"), new NumberObj(17, "Seventeen"),
+                new NumberObj(18, "Eighteen"), new NumberObj(19, "Nineteen")
+        ));
+        numList.addAll(getNumsByTens());
+        return numList;
+    }
+    public ArrayList<NumberObj> getNumsByTens(){
+        ArrayList<NumberObj> numList= new ArrayList<NumberObj>(Arrays.asList(
+                new NumberObj(20, "Twenty"), new NumberObj(30, "Thirty"), new NumberObj(40, "Forty"), new NumberObj(50, "Fifty"),
+                new NumberObj(60, "Sixty"), new NumberObj(70,  "Seventy"), new NumberObj(80, "Eighty"), new NumberObj(90, "Ninety")
         ));
         return numList;
     }
-    public ArrayList<Number> getNumsByTens(){
-        ArrayList<Number> numList= new ArrayList<Number>(Arrays.asList(
-                new Number(20, "Twenty"), new Number(30, "Thirty"), new Number(40, "Forty"), new Number(50, "Fifty"),
-                new Number(60, "Sixty"), new Number(70,  "Seventy"), new Number(80, "Eighty"), new Number(90, "Ninety")
-        ));
-        return numList;
-    }
 
-    public ArrayList<Number> getNumsByHundreds(){
-        ArrayList<Number> numList= new ArrayList<Number>(Arrays.asList(new Number(100, "Hundred"),
-                new Number(1000, "Thousand"), new Number(1000000, "Million")));
+    public ArrayList<NumberObj> getNumsByHundreds(){
+        ArrayList<NumberObj> numList= new ArrayList<NumberObj>(Arrays.asList(new NumberObj(100, "Hundred"),
+                new NumberObj(1000, "Thousand"), new NumberObj(1000000, "Million")));
         return numList;
     }
 
 
-    public Number getNumberByListAndName(ArrayList<Number> list, String name){
-        return list.stream().filter(x->x.getName().equals(name)).findFirst().get();
+    public NumberObj getNumberByListAndName(ArrayList<NumberObj> list, String name){
+        try{
+           return list.stream().filter(x->x.getName().equals(name)).findFirst().get();
+        }
+        catch(Exception e){
+            System.out.println(name);
+           return new NumberObj(0,"Zero");
+        }
     }
 
 

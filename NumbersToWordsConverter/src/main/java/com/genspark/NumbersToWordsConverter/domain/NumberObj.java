@@ -1,14 +1,14 @@
 package com.genspark.NumbersToWordsConverter.domain;
 
 
-public class Number implements Comparable<Number> {
+public class NumberObj implements Comparable<NumberObj> {
     private int index;
     private String name;
 
-    public Number(){
+    public NumberObj(){
         super();
     }
-    public Number(int index, String name){
+    public NumberObj(int index, String name){
         this.index=index;
         this.name=name;
     }
@@ -25,8 +25,8 @@ public class Number implements Comparable<Number> {
         this.name = name;
     }
     @Override
-    public int compareTo(Number n) {
-        int compareIndex=((Number) n).getIndex();
+    public int compareTo(NumberObj n) {
+        int compareIndex=((NumberObj) n).getIndex();
         return this.getIndex()-compareIndex; //ascending
     }
     @Override

@@ -1,14 +1,10 @@
 package com.genspark.NumbersToWordsConverter.service;
 
-import com.genspark.NumbersToWordsConverter.domain.Number;
+import com.genspark.NumbersToWordsConverter.domain.NumberObj;
 import com.genspark.NumbersToWordsConverter.domain.NumberSet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Converter {
     public ArrayList<String> sorted=new ArrayList<>();
@@ -20,27 +16,63 @@ public class Converter {
         //By Tens+" "+<10 //add
     }
 
-    public Number getNumber(String num){
-        NumberSet numSet=new NumberSet(); Number getNum=null;
-        ArrayList<Number> sorted=new ArrayList<>();
-        int spaces = (int) num.chars().filter(n -> n == (int)' ').count();
+    public NumberObj getNumber(String num){
+        NumberSet numSet=new NumberSet(); NumberObj getNum=null;
+        ArrayList<NumberObj> sorted=new ArrayList<>();
         numSet.getNumsOneToNineteen().stream().forEach(x->{
-            if(spaces==1){
+            if(num.contains(" ")){
                 String[] split=num.split(" ");
-                sorted.add(new Number(numSet.getNumberByListAndName(numSet.getNumsByTens(),split[0]).getIndex()+
+                sorted.add(new NumberObj(numSet.getNumberByListAndName(numSet.getNumsByTens(),split[0]).getIndex()+
                         numSet.getNumberByListAndName(numSet.getNumsOneToNineteen(),split[1]).getIndex(),
-                        split[0]+" "+split[1]));
+                        split[0]+" "+split[1])); //Add Double Digits
             }
-            else if(x.getName().equals(num)) {
-                sorted.add(new Number(x.getIndex(),x.getName()));
+            else if(x.getName().equals(num)) {  //Add Single Digits
+                sorted.add(new NumberObj(x.getIndex(),x.getName()));
             }
         });
         return sorted.get(0);
     }
-    public ArrayList<Number> getNumbersFromArrayList(ArrayList<String> numbers){
-        Converter con=new Converter();ArrayList<Number> allNums=new ArrayList<>();
+
+    public ArrayList<NumberObj> getNumbersFromArrayList(ArrayList<String> numbers){
+        ArrayList<NumberObj> allNums=new ArrayList<>();Converter con=new Converter();
         numbers.forEach(x->allNums.add(con.getNumber(x)));
         Collections.sort(allNums);
         return allNums;
+//
+//        Converter con=new Converter();ArrayList<Number> allNums=new ArrayList<>();
+//        ArrayList<String> test=new ArrayList<>(Arrays.asList("Twenty", "Three", "Thirteen", "Fifteen", "Thirty One", "Fifty Two", "Twenty Nine"));
+//        test.forEach(x->allNums.add(con.getNumber(x)));
+//        Collections.sort(allNums);
+    }
+
+    public int getHundreds(String num){
+        NumberSet set=new NumberSet();
+        int spaces = (int) num.chars().filter(n -> n == (int)' ').count();
+        String[] split=num.split(" ");int count=0;
+        for(int i =0; i<=spaces; i++) {
+            NumberObj n=set.getNumberByListAndName(set.getNumsByHundreds(), split[i]);
+            if(n.getIndex()!=0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public NumberObj hundredsLoop(String num){
+        NumberSet numSet= new NumberSet(); NumberObj getNum=null; String[] split=num.split(" ");
+        int spaces = (int) num.chars().filter(n -> n == (int)' ').count(); ArrayList<NumberObj> sorted=new ArrayList<>();
+        numSet.getNumsOneToNineteen().stream().forEach(x->{
+            for(int i=0; i<getHundreds(num); i++) {
+                if (x.getName()!=split[i]) {
+                    sorted.add(new NumberObj(numSet.getNumberByListAndName(numSet.getNumsOneToNineteen(), split[0]).getIndex() *
+                            numSet.getNumberByListAndName(numSet.getNumsByHundreds(), split[1]).getIndex(),
+                            split[0] + " " + split[1]));
+                }
+                else{  //Add Single Digits
+                    sorted.add(new NumberObj(x.getIndex(),x.getName()));
+                }
+            }
+        });
+        return sorted.get(0);
     }
 }
