@@ -88,13 +88,19 @@ class NumbersToWordsConverterApplicationTests {
 		useFile.display(useFile.format(3,testArr));
 	}
 
+	@Test void getColGeneration(){
+		int file=7;int cols=(int) Math.floor(Math.sqrt(Math.ceil((double)file / 2)));
+		assertEquals(cols,2);
+		file=25;cols=(int) Math.floor(Math.sqrt(Math.ceil((double)file / 2)));
+		assertEquals(cols, 3);
+	}
+
 	@Test
-	public void centerString () {
-		int width = 20; String s = "center";
-		int padSize = width - s.length(), padStart = s.length() + padSize / 2;
-		s = String.format("%" + padStart + "s", s);
-		s = String.format("%-" + width  + "s", s);
-		System.out.println("|"+s+"|");
+	public void display() {
+		UseFile useFile=new UseFile(); Converter con=new Converter();
+		ArrayList<String> file=useFile.readNumbers("src/main/resources/numbersFile.txt");
+		int cols=(int) Math.floor(Math.sqrt(Math.ceil((double)file.size() / 2)));
+		useFile.display(useFile.format(cols,con.getNumbersFromArrayList(file)));
 	}
 
 	@AfterEach
