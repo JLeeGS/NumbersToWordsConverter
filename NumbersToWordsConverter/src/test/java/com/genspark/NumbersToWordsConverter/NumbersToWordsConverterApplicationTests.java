@@ -85,7 +85,16 @@ class NumbersToWordsConverterApplicationTests {
 				new NumberObj(7, "Seven"), new NumberObj(8, "Eight"), new NumberObj(19, "Nineteen"),
 				new NumberObj(20, "Twenty"), new NumberObj(88, "Eighty Eight")));
 		UseFile useFile=new UseFile();
-		useFile.display(useFile.format(2,testArr));
+		useFile.display(useFile.format(3,testArr));
+	}
+
+	@Test
+	public void centerString () {
+		int width = 20; String s = "center";
+		int padSize = width - s.length(), padStart = s.length() + padSize / 2;
+		s = String.format("%" + padStart + "s", s);
+		s = String.format("%-" + width  + "s", s);
+		System.out.println("|"+s+"|");
 	}
 
 	@AfterEach

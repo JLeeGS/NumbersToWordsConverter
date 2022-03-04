@@ -44,30 +44,25 @@ public class UseFile {
             for(int k = numbers.size() - numLeftOver; k < numbers.size(); k++){
                 leftOvers.add(numbers.get(k));
             }
-            int numNeeded = numElementsInFullCol - numLeftOver;
-            for(int l = 0; l < numNeeded; l++){
-                leftOvers.add(null);
-            }
-            columList.add(leftOvers);
+//            int numNeeded = numElementsInFullCol - numLeftOver;
+//            for(int l = 0; l < numNeeded; l++){
+//                leftOvers.add(new NumberObj(0, "Zero"));
+//            }
+//            columList.add(leftOvers);
         }
         return columList;
     }
 
     public void display(ArrayList<ArrayList<NumberObj>> numbersArray){
-        //One       //Five
-        //Two       //Six
-        //Three     //Seven   eachcol=size/2 (+1 if not even)
-        //Four                  leftover
-        int fullSize = numbersArray.get(0).size();
-
-        for(int i = 0; i < fullSize; i++){
-            for(int j = 0; j < numbersArray.size(); j++){
-                int maxNum=numbersArray.get(j).stream().mapToInt(x->x.getName().length()).max().getAsInt();
-                int 
-                //System.out.println(numbersArray.get(j).get(i)+ " ");
-                System.out.print(numbersArray.get(j).get(i).getName()+" ");
+            int fullSize = numbersArray.get(0).size();
+            for (int i = 0; i < fullSize; i++) {
+                for (int j = 0; j < numbersArray.size(); j++) {
+                    System.out.printf(centerString(10, numbersArray.get(j).get(i).getName()));
+                }
+                System.out.println();
             }
-            System.out.println();
-        }
+    }
+    public String centerString(int width, String s){
+        return String.format("%-" + width  + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
     }
 }

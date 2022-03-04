@@ -15,6 +15,7 @@ public class NumbersToWordsConverterApplication {
 	public static void main(String[] args) {
 		Converter con=new Converter(); UseFile useFile=new UseFile();
 		ArrayList<String> file=useFile.readNumbers();
-		System.out.println(con.getNumbersFromArrayList(file));
+		//System.out.println(useFile.format(2,con.getNumbersFromArrayList(file)));
+		useFile.display(useFile.format(2,con.getNumbersFromArrayList(file)));
 	}
 }
