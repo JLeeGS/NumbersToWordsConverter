@@ -38,11 +38,6 @@ public class Converter {
         numbers.forEach(x->allNums.add(con.getNumber(x)));
         Collections.sort(allNums);
         return allNums;
-//
-//        Converter con=new Converter();ArrayList<Number> allNums=new ArrayList<>();
-//        ArrayList<String> test=new ArrayList<>(Arrays.asList("Twenty", "Three", "Thirteen", "Fifteen", "Thirty One", "Fifty Two", "Twenty Nine"));
-//        test.forEach(x->allNums.add(con.getNumber(x)));
-//        Collections.sort(allNums);
     }
 
     public int getHundreds(String num){

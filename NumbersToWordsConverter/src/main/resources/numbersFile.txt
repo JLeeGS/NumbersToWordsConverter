@@ -5,8 +5,3 @@ Fifteen
 Twenty Five
 Eighty Eight
 Eight
-Forty Five
-Sixty
-Three
-Six
-Seven

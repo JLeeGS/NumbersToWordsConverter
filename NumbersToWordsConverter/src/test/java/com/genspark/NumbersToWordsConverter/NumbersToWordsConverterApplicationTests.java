@@ -74,7 +74,7 @@ class NumbersToWordsConverterApplicationTests {
 	@Test
 	void getNumberFromFile(){
 		UseFile useFile=new UseFile();
-		useFile.readNumbers().forEach(x->{
+		useFile.readNumbers("src/main/resources/numbersFile.txt").forEach(x->{
 			System.out.println(x);
 		});
 	}
